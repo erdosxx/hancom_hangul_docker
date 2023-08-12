@@ -1,0 +1,6 @@
+[general]
+preload-engines=['xkb:us::eng', 'hangul']
+version='1.5.22'
+
+[general/hotkey]
+triggers=['F8']
