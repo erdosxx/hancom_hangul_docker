@@ -29,21 +29,24 @@ $ git clone https://github.com/erdosxx/hancom_hangul_docker.git
 
 ```
 
-2. Download Hancom HWP Debian package file, `hoffice-hwp_11.20.0.989_amd64.deb`
-   from [this](https://yadi.sk/d/G4vRRdsLZznPng) and move it to this repository.
+2. Download Hancom HWP Debian package file, `hoffice_hwp_2020_amd64.deb`.
+
+```shell
+wget --header="Host: cdn.hancom.com" --header="Referer: https://www.hancom.com/cs_center" https://cdn.hancom.com/pds/hnc/DOWN/gooroom/hoffice_hwp_2020_amd64.deb
+```
 
 3. Build docker image.
 
 ```shell
-$ docker buildx build -t hangul_11.20.0.989:1.0.1 -f Dockerfile .
+$ docker buildx build -t hangul_2020:1.0 -f Dockerfile .
 ```
 
 After above command, check created docker image.
 
 ```shell
 $ docker images
-REPOSITORY           TAG       IMAGE ID       CREATED          SIZE
-hangul_11.20.0.989   1.0.1     539a5663dca4   26 minutes ago   3.53GB
+REPOSITORY           TAG       IMAGE ID       CREATED         SIZE
+hangul_2020          1.0       3b486a47cb52   7 minutes ago   3.53GB
 ```
 
 4. Copy running script in your PATH, for exmaple, `~/.local/bin/`.

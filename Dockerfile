@@ -2,7 +2,7 @@ FROM ubuntu:20.04
 
 RUN apt update
 # Download from https://yadi.sk/d/G4vRRdsLZznPng
-COPY hoffice-hwp_11.20.0.989_amd64.deb /root/
+COPY hoffice_hwp_2020_amd64.deb /root/
 COPY hwp.sh /root/
 
 # For ibus setting: Add Hangul input with toggling by <F8> key.
@@ -32,6 +32,6 @@ RUN apt-get install '^libxcb.*-dev' libx11-xcb-dev libglu1-mesa-dev libxrender-d
 RUN apt install libglib2.0-bin -y
 RUN apt install gsettings-desktop-schemas -y
 
-RUN dpkg -i hoffice-hwp_11.20.0.989_amd64.deb 
+RUN dpkg -i hoffice_hwp_2020_amd64.deb
 
 CMD sh hwp.sh
