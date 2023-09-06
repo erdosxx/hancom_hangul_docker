@@ -17,6 +17,7 @@ $ sudo emerge -av app-containers/docker
 $ sudo emerge -av docker-cli
 $ sudo emerge -av docker-buildx
 
+$ sudo emerge -av sys-devel/make
 $ sudo emerge -av xhost
 ```
 
@@ -29,31 +30,35 @@ $ git clone https://github.com/erdosxx/hancom_hangul_docker.git
 
 ```
 
-2. Download Hancom HWP Debian package file, `hoffice_hwp_2020_amd64.deb`.
+2. Define `DESTDIR` for the location of the script, `run_hwp.sh`.
+   The default location is `$HOME/.local/bin`, so without definition of it,
+   the default location is used.
 
 ```shell
-wget --header="Host: cdn.hancom.com" --header="Referer: https://www.hancom.com/cs_center" https://cdn.hancom.com/pds/hnc/DOWN/gooroom/hoffice_hwp_2020_amd64.deb
+$ export DESTDIR="$HOME/.local/bin"
 ```
 
-3. Build docker image.
+Run `make`.
 
 ```shell
-$ docker buildx build -t hangul_2020:1.0 -f Dockerfile .
+$ make
 ```
 
-After above command, check created docker image.
+Check the installed docker images as following.
 
 ```shell
 $ docker images
-REPOSITORY           TAG       IMAGE ID       CREATED         SIZE
-hangul_2020          1.0       3b486a47cb52   7 minutes ago   3.53GB
+REPOSITORY     TAG       IMAGE ID       CREATED          SIZE
+hangul_2020    1.0       8f62f4663ad9   23 minutes ago   3.77GB
 ```
 
-4. Copy running script in your PATH, for exmaple, `~/.local/bin/`.
+# Uninstall
+
+With the definition of `DESTDIR`, run
 
 ```shell
-$ cp run_hwp.sh ~/.local/bin/
-$ chmod 744 ~/.local/bin/run_hwp.sh
+$ export DESTDIR="$HOME/.local/bin"
+$ make uninstall
 ```
 
 # How to use
@@ -61,7 +66,7 @@ $ chmod 744 ~/.local/bin/run_hwp.sh
 After installation, you can run this as following.
 
 ```shell
-$ ~/.local/bin/run_hwp.sh
+$ $DESTDIR/run_hwp.sh
 
 ```
 

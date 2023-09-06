@@ -32,6 +32,12 @@ RUN apt-get install '^libxcb.*-dev' libx11-xcb-dev libglu1-mesa-dev libxrender-d
 RUN apt install libglib2.0-bin -y
 RUN apt install gsettings-desktop-schemas -y
 
+# locale setting to supoort Korean filename.
+RUN apt-get install -y locales locales-all
+ENV LC_ALL en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US.UTF-8
+
 RUN dpkg -i hoffice_hwp_2020_amd64.deb
 
 CMD sh hwp.sh
