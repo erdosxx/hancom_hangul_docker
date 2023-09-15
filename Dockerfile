@@ -34,10 +34,14 @@ RUN apt install gsettings-desktop-schemas -y
 
 # locale setting to supoort Korean filename.
 RUN apt-get install -y locales locales-all
-ENV LC_ALL en_US.UTF-8
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US.UTF-8
+ENV LC_ALL ko_KR.UTF-8
+ENV LANG ko_KR.UTF-8
+ENV LANGUAGE ko_KR.UTF-8
+ENV XDG_RUNTIME_DIR /tmp/runtime-root
 
 RUN dpkg -i hoffice_hwp_2020_amd64.deb
 
-CMD sh hwp.sh
+ARG GetMyHome
+RUN mkdir -p ${GetMyHome}
+ENV HOME ${GetMyHome}
+WORKDIR ${HOME}

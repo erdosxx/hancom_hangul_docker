@@ -8,7 +8,8 @@ if [[ ! -e $HWP_PACKAGE ]]; then
     https://cdn.hancom.com/pds/hnc/DOWN/gooroom/"$HWP_PACKAGE"
 fi
 
-docker buildx build -t hangul_2020:1.0 -f Dockerfile .
+docker buildx build -t hangul_2020:1.0 -f Dockerfile --no-cache \
+  --build-arg GetMyHome="$HOME" .
 
 LOCATION=${DESTDIR:-~/.local/bin}
 

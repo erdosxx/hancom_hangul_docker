@@ -66,7 +66,7 @@ $ make uninstall
 After installation, you can run this as following.
 
 ```shell
-$ $DESTDIR/run_hwp.sh
+$ $DESTDIR/run_hwp.sh <filename.hwp>
 
 ```
 
@@ -74,6 +74,5 @@ When the program launched, you can only type English characters.
 To type Hangul with English, press `<F8>` key and change to Hangul input mode.
 With this, using your local(original) Hangul-English toggle key, you can
 type Hangul and English.
-As you can find in `run_hwp.sh` file, this docker image
-mounts your local `~/Docuemnts` and `~/Downloads` folder to the docker file system.
-If you want to change it or add more folders, you can edit `run_hwp.sh` as you want.
+The mount and working directory in docker image is your `$HOME` folder. So
+you can use this tool as if it runs without docker environment.
