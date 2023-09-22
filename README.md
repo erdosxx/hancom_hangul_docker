@@ -70,9 +70,19 @@ $ $DESTDIR/run_hwp.sh <filename.hwp>
 
 ```
 
-When the program launched, you can only type English characters.
-To type Hangul with English, press `<F8>` key and change to Hangul input mode.
-With this, using your local(original) Hangul-English toggle key, you can
-type Hangul and English.
 The mount and working directory in docker image is your `$HOME` folder. So
 you can use this tool as if it runs without docker environment.
+With [LF](https://github.com/gokcehan/lf) and [Ranger](https://github.com/ranger/ranger)
+file manager, we can easily open HWP file.
+To set LF, for example, please refer to [lfrc file](https://github.com/erdosxx/evoagile_configs/blob/master/lf/.config/lf/lfrc). That is, in `lfrc` file, add following line.
+
+```shell
+application/x-hwp|application/x-hwp+zip) setsid -f run_hwp.sh $f >/dev/null 2>&1 ;;
+```
+
+For Ranger, for example, see [riffle.conf](https://github.com/erdosxx/evoagile_configs/blob/master/ranger/.config/ranger/rifle.conf) file.
+That is, in `rifle.conf` file, add following line.
+
+```shell
+ext hwp,  has run_hwp.sh,    X, flag f = run_hwp.sh "$@"
+```
