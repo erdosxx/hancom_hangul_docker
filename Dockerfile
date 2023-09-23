@@ -21,6 +21,7 @@ COPY selections.conf /root/
 RUN apt install debconf-utils -y
 RUN debconf-set-selections < selections.conf
 RUN apt install ibus ibus-hangul -y
+RUN apt install fonts-noto-cjk -y
 
 # Install libraries in run time dependencies
 RUN apt install libglu1 -y
