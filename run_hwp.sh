@@ -16,7 +16,9 @@ get_absolute_path() {
 
 [[ -z "$INPUT_PATH_FILE" ]] && FILE="" || FILE=$(get_absolute_path "$INPUT_PATH_FILE")
 
+  # --volume "$HOME":"$HOME" --device=/dev/dri:/dev/dri \
 docker run --rm --env DISPLAY="$DISPLAY" --volume /tmp/.X11-unix/:/tmp/.X11-unix/ \
-  --volume "$HOME":"$HOME" --device=/dev/dri:/dev/dri --entrypoint /root/hwp.sh hangul_2020:1.0 "$FILE"
+  --volume "$HOME":"$HOME" --device=/dev/dri:/dev/dri --env "QT_SCALE_FACTOR=1" \
+  --entrypoint /root/hwp.sh hangul_2020:1.0 "$FILE"
 
 xhost - > /dev/null 2>&1

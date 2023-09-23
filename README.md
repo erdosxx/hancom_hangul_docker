@@ -86,3 +86,15 @@ That is, in `rifle.conf` file, add following line.
 ```shell
 ext hwp,  has run_hwp.sh,    X, flag f = run_hwp.sh "$@"
 ```
+
+# Tips
+
+If you think that zoom level of HWP application is small, you can zoom up by editing
+`run_hwp.sh` file. The default scale factor is 1.
+For example, to increase it to 1.2, change the value of `QT_SCALE_FACTOR` as following.
+
+```shell
+...
+  --volume "$HOME":"$HOME" --device=/dev/dri:/dev/dri --env "QT_SCALE_FACTOR=1.2" \
+...
+```
