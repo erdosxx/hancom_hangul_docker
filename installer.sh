@@ -14,7 +14,7 @@ docker buildx build -t hangul_2020:1.0 -f Dockerfile --no-cache \
 LOCATION=${DESTDIR:-~/.local/bin}
 
 if [[ -d "$LOCATION" ]]; then
-  cp run_hwp.sh "$LOCATION"
+  ln -s "$(pwd)"/run_hwp.sh "$LOCATION"/ 
 else
   echo "The default install location, $LOCATION is not exist."
   echo "Set DESTDIR to your own location."

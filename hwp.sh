@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 export GTK_IM_MODULE=ibus
 export XMODIFIERS=@im=ibus
@@ -13,4 +13,5 @@ fi
 dconf load /desktop/ibus/ < /root/ibus.dconf
 # Fix to hangul input bug: https://hamonikr.org/board_bFBk25/98079 
 gsettings set org.freedesktop.ibus.engine.hangul use-event-forwarding false
-/opt/hnc/hoffice11/Bin/hwp "$@"
+
+[[ -z "$1" ]] && /opt/hnc/hoffice11/Bin/hwp || /opt/hnc/hoffice11/Bin/hwp "$1"
