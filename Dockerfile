@@ -42,7 +42,7 @@ ENV XDG_RUNTIME_DIR /tmp/runtime-root
 
 RUN dpkg -i hoffice_hwp_2020_amd64.deb
 
-ARG GetMyHome
-RUN mkdir -p ${GetMyHome}
-ENV HOME ${GetMyHome}
-WORKDIR ${HOME}
+# This HOME folder will be used for mount point for user's home.
+ENV HOME /home/user
+RUN mkdir -p $HOME
+WORKDIR $HOME
