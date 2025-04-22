@@ -13,6 +13,7 @@ you can simply try to run.
 ```shell
 $ nix run github:erdosxx/hancom_hangul_docker
 ```
+
 or with file
 
 ```shell
@@ -127,8 +128,19 @@ $ $DESTDIR/run_hwp.sh <filename.hwp>
 
 ```
 
-The mount and working directory in docker image is your `$HOME` folder. So
-you can use this tool as if it runs without docker environment.
+```shell
+# run_hwp.sh
+...
+docker run --rm --env DISPLAY="$DISPLAY" --volume /tmp/.X11-unix/:/tmp/.X11-unix/ \
+  --volume "$HOME":/home/user --device=/dev/dri:/dev/dri --env "QT_SCALE_FACTOR=1" \
+  --entrypoint /root/hwp.sh hangul_2020:1.1 "$FILE"
+...
+
+```
+When runing this App, current `$HOME` folder is mounted to docker image's `/home/user` folder.
+So, you can easily access your files in your `$HOME` folder.
+(See in above script `--volume "$HOME"...`.)
+
 With [LF](https://github.com/gokcehan/lf) and [Ranger](https://github.com/ranger/ranger)
 file manager, we can easily open HWP file.
 To set LF, for example, please refer to [lfrc file](https://github.com/erdosxx/evoagile_configs/blob/master/lf/.config/lf/lfrc). That is, in `lfrc` file, add following line.
@@ -156,6 +168,16 @@ For example, to increase it to 1.2, change the value of `QT_SCALE_FACTOR` as fol
 ...
   --volume "$HOME":"$HOME" --device=/dev/dri:/dev/dri --env "QT_SCALE_FACTOR=1.2" \
 ...
+```
+
+For Nix based system you can change `resolution` in `flake.nix`
+
+```nix
+  outputs = { self, nixpkgs, flake-utils, }:
+    flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = import nixpkgs { inherit system; };
+        resolution = "1"; # For zooming, increse this ex) 1 -> 1.2
 ```
 
 ## Build your own docker image
@@ -216,4 +238,7 @@ $ docker login -u maxecho
 
 # Upload image to dockerhub
 $ docker push maxecho/hangul_2020:1.1
+
+# Run interactive shell
+$ docker run -it --rm hangul_2020:1.1 bash
 ```

@@ -8,6 +8,8 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { inherit system; };
+        resolution = "1"; # For zooming, increse this ex) 1 -> 1.2
+
         hwpImage = self.packages.${system}.default;
         dockerhubUser = "maxecho";
         imgName = "hangul_2020";
@@ -85,7 +87,7 @@
               --volume /tmp/.X11-unix/:/tmp/.X11-unix/ \
               --volume $HOME:/home/user \
               --device=/dev/dri:/dev/dri \
-              --env "QT_SCALE_FACTOR=1" \
+              --env "QT_SCALE_FACTOR=${resolution}" \
               --entrypoint /root/hwp.sh \
               hangul_2020:1.1 "$FILE"
 
